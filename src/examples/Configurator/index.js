@@ -15,10 +15,6 @@ Coded by www.creative-tim.com
 
 import { useState, useEffect } from "react";
 
-// react-github-btn
-import GitHubButton from "react-github-btn";
-
-// clsx is a utility for constructing className strings conditionally
 import clsx from "clsx";
 
 // @mui material components
@@ -26,12 +22,7 @@ import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
-
-// @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
@@ -108,7 +99,7 @@ function Configurator() {
         px={3}
       >
         <SuiBox>
-          <SuiTypography variant="h5">Soft UI Configurator</SuiTypography>
+          <SuiTypography variant="h5">Configurator</SuiTypography>
           <SuiTypography variant="body2" textColor="text">
             See our dashboard options.
           </SuiTypography>
@@ -181,89 +172,7 @@ function Configurator() {
 
           <Switch checked={miniSidenav} onChange={handleMiniSidenav} />
         </SuiBox>
-
         <Divider />
-
-        <SuiBox mt={3} mb={2}>
-          <SuiBox mb={2}>
-            <SuiButton
-              component={Link}
-              href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-react"
-              target="_blank"
-              rel="noreferrer"
-              buttonColor="info"
-              variant="gradient"
-              fullWidth
-            >
-              buy now
-            </SuiButton>
-          </SuiBox>
-          <SuiBox mb={2}>
-            <SuiButton
-              component={Link}
-              href="https://www.creative-tim.com/product/soft-ui-dashboard-react"
-              target="_blank"
-              rel="noreferrer"
-              buttonColor="dark"
-              variant="gradient"
-              fullWidth
-            >
-              free download
-            </SuiButton>
-          </SuiBox>
-          <SuiButton
-            component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/soft-ui-dashboard"
-            target="_blank"
-            rel="noreferrer"
-            buttonColor="dark"
-            variant="outlined"
-            fullWidth
-          >
-            view documentation
-          </SuiButton>
-        </SuiBox>
-        <SuiBox display="flex" justifyContent="center">
-          <GitHubButton
-            href="https://github.com/creativetimofficial/ct-soft-ui-dashboard-pro-react"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star creativetimofficial/ct-soft-ui-dashboard-pro-react on GitHub"
-          >
-            Star
-          </GitHubButton>
-        </SuiBox>
-        <SuiBox mt={3} textAlign="center">
-          <SuiBox mb={0.5}>
-            <SuiTypography variant="h6">Thank you for sharing!</SuiTypography>
-          </SuiBox>
-
-          <SuiBox display="flex" justifyContent="center">
-            <SuiBox mr={1.5}>
-              <SuiButton
-                component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Soft%20UI%20Dashboard%20PRO%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard-pro-react"
-                target="_blank"
-                rel="noreferrer"
-                buttonColor="dark"
-              >
-                <TwitterIcon />
-                &nbsp; Tweet
-              </SuiButton>
-            </SuiBox>
-            <SuiButton
-              component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/soft-ui-dashboard-pro-react"
-              target="_blank"
-              rel="noreferrer"
-              buttonColor="dark"
-            >
-              <FacebookIcon />
-              &nbsp; Share
-            </SuiButton>
-          </SuiBox>
-        </SuiBox>
       </SuiBox>
     </Drawer>
   );

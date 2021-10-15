@@ -35,18 +35,22 @@ import styles from "layouts/authentication/components/BasicLayout/styles";
 
 // Soft UI Dashboard PRO React page layout routes
 import pageRoutes from "pageRoutes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BasicLayout({ title, description, image, children }) {
   const classes = styles({ image });
 
   return (
     <PageLayout>
+      <ToastContainer />
+
       <DefaultNavbar
         routes={pageRoutes}
         action={{
           type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-pro-material-ui",
-          label: "buy now",
+          route: "http://soinmedia.com",
+          label: "Soin media",
         }}
         transparent
         light

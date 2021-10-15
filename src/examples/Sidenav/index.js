@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useEffect, useState } from "react";
 
 // react-router-dom components
-import { useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink, Link as RouterLink } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -156,9 +156,9 @@ function Sidenav({ routes, ...rest }) {
       if (type === "collapse") {
         returnValue = route ? (
           <Link
-            href={route}
+            component={RouterLink}
+            to={route}
             key={key}
-            target="_blank"
             rel="noreferrer"
             className={classes.sidenav_navlink}
           >
@@ -235,7 +235,7 @@ function Sidenav({ routes, ...rest }) {
           />
           <SuiBox customClass={classes.sidenav_logoLabel}>
             <SuiTypography component="h6" variant="button" fontWeight="medium">
-              Soft UI Dashboard PRO
+              Soincorp
             </SuiTypography>
           </SuiBox>
         </NavLink>

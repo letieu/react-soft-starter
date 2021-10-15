@@ -31,7 +31,6 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
 
 // Soft UI Dashboard PRO React base styles
@@ -57,15 +56,10 @@ function DefaultNavbar({ routes, transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
 
-  const openPagesMenu = ({ currentTarget }) => setPagesMenu(currentTarget);
   const closePagesMenu = () => setPagesMenu(false);
-  const openAuthenticationMenu = ({ currentTarget }) => setAuthenticationMenu(currentTarget);
   const closeAuthenticationMenu = () => setAuthenticationMenu(false);
-  const openEcommerceMenu = ({ currentTarget }) => setEcommerceMenu(currentTarget);
   const closeEcommerceMenu = () => setEcommerceMenu(false);
-  const openApplicationsMenu = ({ currentTarget }) => setApplicationsMenu(currentTarget);
   const closeApplicationsMenu = () => setApplicationsMenu(false);
-  const openDocsMenu = ({ currentTarget }) => setDocsMenu(currentTarget);
   const closeDocsMenu = () => setDocsMenu(false);
   const openMobileNavbar = ({ currentTarget }) => setMobileNavbar(currentTarget.parentNode);
   const closeMobileNavbar = () => setMobileNavbar(false);
@@ -104,41 +98,8 @@ function DefaultNavbar({ routes, transparent, light, action }) {
       >
         <SuiBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
           <SuiTypography variant="button" fontWeight="bold" textColor={light ? "white" : "dark"}>
-            Soft UI Dashboard PRO
+            Soincorp
           </SuiTypography>
-        </SuiBox>
-        <SuiBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink
-            name="pages"
-            openHandler={openPagesMenu}
-            closeHandler={closePagesMenu}
-            light={light}
-          />
-          <DefaultNavbarLink
-            name="authentication"
-            openHandler={openAuthenticationMenu}
-            closeHandler={closeAuthenticationMenu}
-            light={light}
-          />
-
-          <DefaultNavbarLink
-            name="application"
-            openHandler={openApplicationsMenu}
-            closeHandler={closeApplicationsMenu}
-            light={light}
-          />
-          <DefaultNavbarLink
-            name="ecommerce"
-            openHandler={openEcommerceMenu}
-            closeHandler={closeEcommerceMenu}
-            light={light}
-          />
-          <DefaultNavbarLink
-            name="docs"
-            openHandler={openDocsMenu}
-            closeHandler={closeDocsMenu}
-            light={light}
-          />
         </SuiBox>
         {action &&
           (action.type === "internal" ? (

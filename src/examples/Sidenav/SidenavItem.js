@@ -28,7 +28,7 @@ import SuiBox from "components/SuiBox";
 // Custom styles for the SidenavItem
 import styles from "examples/Sidenav/styles/sidenavItem";
 
-// Soft UI Dashboard PRO React contexts
+// Soft UI Dashboard PRO React context
 import { useSoftUIController } from "context";
 
 function SidenavItem({ name, active, nested, children, open, ...rest }) {

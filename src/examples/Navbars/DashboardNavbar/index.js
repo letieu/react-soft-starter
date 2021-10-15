@@ -13,10 +13,10 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useHistory } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -31,7 +31,6 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
 
 // Soft UI Dashboard PRO React example components
 import Breadcrumbs from "examples/Breadcrumbs";
@@ -46,7 +45,10 @@ import { useSoftUIController } from "context";
 // Images
 import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import jwtManager from "../../../helper/jwtManager";
+import UserContext from "../../../context/userContext";
 
+// eslint-disable-next-line react/prop-types
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useSoftUIController();
@@ -54,6 +56,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [openMenu, setOpenMenu] = useState(false);
   const classes = styles({ transparentNavbar, absolute, light, isMini });
   const route = useLocation().pathname.split("/").slice(1);
+  const history = useHistory();
+  const user = useContext(UserContext);
 
   useEffect(() => {
     // Setting the navbar type
@@ -87,8 +91,11 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleMiniSidenav = () => dispatch({ type: "MINI_SIDENAV", value: !miniSidenav });
   const handleConfiguratorOpen = () =>
     dispatch({ type: "OPEN_CONFIGURATOR", value: !openConfigurator });
-  const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+  const handleLogout = () => {
+    jwtManager.clear();
+    history.push("/authentication/sign-in/basic");
+  };
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -148,13 +155,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </SuiBox>
         {isMini ? null : (
           <SuiBox customClass={classes.navbar_row}>
-            <SuiBox pr={1}>
-              <SuiInput
-                placeholder="Type here..."
-                withIcon={{ icon: "search", direction: "left" }}
-                customClass={classes.navbar_input}
-              />
-            </SuiBox>
             <SuiBox
               color={light ? "white" : "inherit"}
               customClass={classes.navbar_section_desktop}
@@ -167,7 +167,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     fontWeight="medium"
                     textColor={light ? "white" : "dark"}
                   >
-                    Sign in
+                    {user.id ? user.title : "Sign in"}
                   </SuiTypography>
                 </IconButton>
               </Link>
@@ -185,20 +185,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 size="small"
                 color="inherit"
                 className={classes.navbar_icon_button}
-                onClick={handleConfiguratorOpen}
+                onClick={handleLogout}
               >
-                <Icon>settings</Icon>
+                <Icon>logout</Icon>
               </IconButton>
               <IconButton
                 size="small"
                 color="inherit"
                 className={classes.navbar_icon_button}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={handleOpenMenu}
+                onClick={handleConfiguratorOpen}
               >
-                <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
+                <Icon>settings</Icon>
               </IconButton>
               {renderMenu()}
             </SuiBox>
