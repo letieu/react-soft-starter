@@ -38,6 +38,7 @@ import SuiPagination from "components/SuiPagination";
 // Soft UI Dashboard PRO React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import { CircularProgress } from "@mui/material";
 
 function DataTable({
   entriesPerPage,
@@ -47,6 +48,7 @@ function DataTable({
   pagination,
   isSorted,
   noEndBorder,
+  loading,
 }) {
   const { defaultValue, entries } = entriesPerPage;
   const columns = useMemo(() => table.columns, [table]);
@@ -115,6 +117,9 @@ function DataTable({
 
   // A function that sets the sorted value for the table
   const setSortedValue = (column) => {
+    if (column.hideSort) {
+      return false;
+    }
     let sortedValue;
 
     if (isSorted && column.isSorted) {
@@ -173,6 +178,12 @@ function DataTable({
           )}
         </SuiBox>
       ) : null}
+      {loading && (
+        <SuiBox style={{ textAlign: "center" }} width="100%">
+          <CircularProgress disableShrink color="info" />
+        </SuiBox>
+      )}
+
       <Table {...getTableProps()}>
         <SuiBox component="thead">
           {headerGroups.map((headerGroup) => (
@@ -180,6 +191,7 @@ function DataTable({
               {headerGroup.headers.map((column) => (
                 <DataTableHeadCell
                   {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
+                  sortable={false}
                   width={column.width ? column.width : "auto"}
                   align={column.align ? column.align : "left"}
                   sorted={setSortedValue(column)}
@@ -265,10 +277,12 @@ DataTable.defaultProps = {
   pagination: { variant: "gradient", color: "info" },
   isSorted: true,
   noEndBorder: false,
+  loading: false,
 };
 
 // Typechecking props for the DataTable
 DataTable.propTypes = {
+  loading: PropTypes.bool,
   entriesPerPage: PropTypes.oneOfType([
     PropTypes.shape({
       defaultValue: PropTypes.number,

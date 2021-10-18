@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cleanObject } from "helper/cleanObject";
+import cleanObject from "helper/cleanObject";
 
 const categoryService = {
   async list(filter = {}) {

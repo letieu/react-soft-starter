@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cleanObject } from "helper/cleanObject";
+import cleanObject from "helper/cleanObject";
 
 const userService = {
   async list(filter) {
@@ -7,7 +7,7 @@ const userService = {
     return axios.get(`/users?${searchParams.toString()}`);
   },
   async create(payload) {
-    return axios.post("/auth/register", payload);
+    return axios.post("/auth/register", cleanObject(payload));
   },
   async remove(id) {
     return axios.delete(`/users/${id}`);
@@ -16,7 +16,7 @@ const userService = {
     return axios.get(`/users/${id}`);
   },
   async update(id, payload) {
-    return axios.patch(`/users/${id}`, payload);
+    return axios.patch(`/users/${id}`, cleanObject(payload));
   },
 };
 

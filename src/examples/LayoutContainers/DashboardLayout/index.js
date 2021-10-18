@@ -32,7 +32,6 @@ import { ToastContainer } from "react-toastify";
 import { UserProvider } from "../../../context/userContext";
 import authService from "../../../services/authService";
 import jwtManager from "../../../helper/jwtManager";
-// Soft UI Dashboard PRO React context
 
 function LayoutContainer({ children }) {
   const [controller, dispatch] = useSoftUIController();

@@ -70,7 +70,7 @@ export default function OrderCreate() {
     try {
       await orderService.create(payload);
       toast.success("Created");
-      window.setTimeout(() => history.push("order"), 500);
+      window.setTimeout(() => history.push("/order"), 500);
     } catch (e) {
       toast.error(e?.response?.data?.message[0]);
       console.log(e);

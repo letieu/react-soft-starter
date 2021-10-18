@@ -28,6 +28,7 @@ const { xxl } = boxShadows;
 export default {
   styleOverrides: {
     root: {
+      overflow: "visible",
       display: "flex",
       flexDirection: "column",
       position: "relative",

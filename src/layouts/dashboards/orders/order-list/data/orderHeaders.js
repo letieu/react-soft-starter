@@ -74,6 +74,7 @@ const getHeaders = ({ handleDelete, handleEdit, handleView }) => [
   {
     Header: "Action",
     accessor: "_id",
+    align: "right",
     Cell: ({ value }) => (
       <ActionCell onDelete={handleDelete} onEdit={handleEdit} onView={handleView} id={value} />
     ),

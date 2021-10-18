@@ -20,6 +20,11 @@ export default makeStyles(({ functions, breakpoints, transitions }) => {
   const { pxToRem } = functions;
 
   return {
+    loadingBar: {
+      position: "fixed",
+      top: "-30px",
+      width: "100vw",
+    },
     layoutContainer: {
       position: "relative",
       padding: pxToRem(24),

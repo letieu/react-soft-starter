@@ -52,6 +52,10 @@ export default makeStyles(({ palette, typography, functions }) => {
       verticalAlign: ({ verticalAlign }) => verticalAlign,
     },
 
+    suiTypography_align: {
+      textAlign: ({ align }) => align,
+    },
+
     suiTypography_textGradient: {
       backgroundImage: ({ textColor }) =>
         textColor !== "inherit" &&

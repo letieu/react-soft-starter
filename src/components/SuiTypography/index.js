@@ -36,13 +36,14 @@ const SuiTypography = forwardRef(
       verticalAlign,
       textGradient,
       opacity,
+      align,
       customClass,
       children,
       ...rest
     },
     ref
   ) => {
-    const classes = styles({ textColor, textTransform, verticalAlign, opacity });
+    const classes = styles({ textColor, textTransform, verticalAlign, opacity, align });
 
     return (
       <Typography
@@ -52,6 +53,7 @@ const SuiTypography = forwardRef(
           [classes[`suiTypography_${fontWeight}`]]: fontWeight,
           [classes.suiTypography_textTransform]: textTransform,
           [classes.suiTypography_verticalAlign]: verticalAlign,
+          [classes.suiTypography_align]: align,
           [classes.suiTypography_textGradient]: textGradient,
         })}
       >
@@ -67,6 +69,7 @@ SuiTypography.defaultProps = {
   fontWeight: false,
   textTransform: "none",
   verticalAlign: "unset",
+  align: "left",
   textGradient: false,
   opacity: 1,
   customClass: "",
@@ -89,6 +92,7 @@ SuiTypography.propTypes = {
   ]),
   fontWeight: PropTypes.oneOf([false, "light", "regular", "medium", "bold"]),
   textTransform: PropTypes.oneOf(["none", "capitalize", "uppercase", "lowercase"]),
+  align: PropTypes.oneOf(["left", "center", "right"]),
   verticalAlign: PropTypes.oneOf([
     "unset",
     "baseline",

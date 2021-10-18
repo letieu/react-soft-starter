@@ -193,8 +193,8 @@ const pageRoutes = [
     collapse: [
       {
         name: "Order List",
-        key: "order-list",
-        route: "/ecommerce/orders/order-list",
+        key: "user-list",
+        route: "/ecommerce/orders/user-list",
       },
       {
         name: "Order Details",

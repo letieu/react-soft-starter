@@ -41,12 +41,17 @@ import OrderList from "layouts/dashboards/orders/order-list";
 
 // Soft UI Dashboard PRO React icons
 import Shop from "examples/Icons/Shop";
-import CreditCard from "examples/Icons/CreditCard";
+import { CardTravel, Category, Inventory2, People } from "@mui/icons-material";
 import Basic from "./layouts/authentication/sign-in/basic";
 // eslint-disable-next-line import/no-named-default
 import { default as RegisterBasic } from "./layouts/authentication/sign-up/basic";
 import OrderCreate from "./layouts/dashboards/orders/order-create/orderCreate";
-// import Index from "./layouts/dashboards/orders/order-list/Index";
+import ProductList from "./layouts/dashboards/products/product-list";
+import ProductCreate from "./layouts/dashboards/products/product-create";
+import CategoryList from "./layouts/dashboards/categories/category-list";
+import CategoryCreate from "./layouts/dashboards/categories/category-create";
+import UserList from "./layouts/dashboards/users/user-list";
+import UserCreate from "./layouts/dashboards/users/user-create";
 
 const routes = [
   // AUTH ===========================================================================
@@ -82,24 +87,84 @@ const routes = [
     route: "/order/:id",
     component: OrderCreate,
   },
+
+  // Product =========================================================================
+  {
+    name: "Create product",
+    key: "product_create",
+    route: "/product/create",
+    component: ProductCreate,
+  },
+  {
+    name: "Edit product",
+    key: "product_edit",
+    route: "/product/:id",
+    component: ProductCreate,
+  },
+
+  // Category =========================================================================
+  {
+    name: "Create category",
+    key: "category_create",
+    route: "/category/create",
+    component: CategoryCreate,
+  },
+  {
+    name: "Edit category",
+    key: "category_edit",
+    route: "/category/:id",
+    component: CategoryCreate,
+  },
+
+  // User =========================================================================
+  {
+    name: "Create user",
+    key: "user_create",
+    route: "/user/create",
+    component: UserCreate,
+  },
+  {
+    name: "Edit user",
+    key: "user_edit",
+    route: "/user/:id",
+    component: UserCreate,
+  },
   // SIDE BAR ======================================================================
   { type: "title", title: "Pages", key: "title-pages" },
   {
-    name: "Order List",
+    name: "Orders",
     key: "order-list",
-    icon: <Shop size="12px" />,
+    icon: <CardTravel size="12px" />,
     type: "collapse",
     route: "/order",
     component: OrderList,
     noCollapse: true,
   },
-  { type: "title", title: "Link", key: "title-links" },
   {
+    name: "Products",
+    key: "product-list",
+    icon: <Inventory2 size="12px" />,
     type: "collapse",
-    name: "About",
-    key: "about",
-    route: "http://soinmedia.com",
-    icon: <CreditCard size="12px" />,
+    route: "/product",
+    component: ProductList,
+    noCollapse: true,
+  },
+  {
+    name: "Categories",
+    key: "category-list",
+    icon: <Category size="12px" />,
+    type: "collapse",
+    route: "/category",
+    component: CategoryList,
+    noCollapse: true,
+  },
+  {
+    name: "Users",
+    key: "user-list",
+    icon: <People size="12px" />,
+    type: "collapse",
+    route: "/user",
+    component: UserList,
     noCollapse: true,
   },
 ];

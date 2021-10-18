@@ -38,10 +38,16 @@ function OutlinedCounterCard({ color, count, title, prefix, suffix }) {
       textAlign="center"
       py={2}
     >
-      <SuiTypography variant="h6" textColor={color} fontWeight="medium" textTransform="capitalize">
+      <SuiTypography
+        variant="h6"
+        align="center"
+        textColor={color}
+        fontWeight="medium"
+        textTransform="capitalize"
+      >
         {title}
       </SuiTypography>
-      <SuiTypography variant="h4" fontWeight="bold">
+      <SuiTypography variant="h4" fontWeight="bold" align="center">
         {prefix && (
           <SuiTypography component="span" variant="h5" fontWeight="bold">
             {prefix}

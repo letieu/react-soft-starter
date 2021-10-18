@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useEffect, useState } from "react";
 
 // @mui material components
@@ -35,30 +20,31 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import { Link, useHistory } from "react-router-dom";
-import orderService from "../../../../services/orderService";
-import getHeaders from "./data/orderHeaders";
+import getHeaders from "./data/headers";
 import confirmService from "../../../../services/confirmService";
+import userService from "../../../../services/userService";
 
-function OrderList() {
+function UserList() {
   const [menu, setMenu] = useState(null);
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const openMenu = (event) => setMenu(event.currentTarget);
   const closeMenu = () => setMenu(null);
 
   function handleEdit(id) {
-    history.push(`/order/${id}`);
+    history.push(`/user/${id}`);
   }
 
   function handleView(id) {
-    history.push(`/order/${id}`);
+    history.push(`/user/${id}`);
   }
 
   function handleDelete(id) {
     const handler = async () => {
-      await orderService.remove(id);
+      await userService.remove(id);
       const index = items.findIndex((i) => i.id === id);
       const tmp = [...items];
       tmp.splice(index, 1);
@@ -69,16 +55,19 @@ function OrderList() {
 
   const columns = getHeaders({ handleEdit, handleDelete, handleView });
   async function fetchItems() {
+    setLoading(true);
     try {
-      const { data } = await orderService.list({ size: 200, status });
+      const { data } = await userService.list({ size: 200, status });
       setItems(data.items);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   }
-  function filterStatus(orderStatus) {
+  function filterStatus(value) {
     closeMenu();
-    setStatus(orderStatus);
+    setStatus(value);
   }
 
   useEffect(() => {
@@ -94,12 +83,10 @@ function OrderList() {
       onClose={closeMenu}
       keepMounted
     >
-      <MenuItem onClick={() => filterStatus("pending")}>Status: Pending</MenuItem>
-      <MenuItem onClick={() => filterStatus("shiping")}>Status: Shipping</MenuItem>
-      <MenuItem onClick={() => filterStatus("success")}>Status: Success</MenuItem>
-      <MenuItem onClick={() => filterStatus("return")}>Status: Refund</MenuItem>
+      <MenuItem onClick={() => filterStatus("active")}>Status: Active</MenuItem>
+      <MenuItem onClick={() => filterStatus("unactive")}>Status: Un Active</MenuItem>
       <Divider sx={{ margin: "0.5rem 0" }} />
-      <MenuItem onClick={() => filterStatus("")}>
+      <MenuItem onClick={() => filterStatus(null)}>
         <SuiTypography variant="button" textColor="error" fontWeight="regular">
           Remove Filter
         </SuiTypography>
@@ -112,9 +99,9 @@ function OrderList() {
       <DashboardNavbar />
       <SuiBox my={3}>
         <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-          <Link to="/order/create">
+          <Link to="/user/create">
             <SuiButton variant="gradient" buttonColor="info">
-              new order
+              new user
             </SuiButton>
           </Link>
           <SuiBox display="flex">
@@ -127,16 +114,15 @@ function OrderList() {
               <Icon className="">keyboard_arrow_down</Icon>
             </SuiButton>
             {renderMenu}
-            <SuiBox ml={1}>
-              <SuiButton variant="outlined" buttonColor="dark">
-                <Icon className="">description</Icon>
-                &nbsp;export csv
-              </SuiButton>
-            </SuiBox>
           </SuiBox>
         </SuiBox>
         <Card>
-          <DataTable table={{ columns, rows: items }} entriesPerPage={false} canSearch />
+          <DataTable
+            table={{ columns, rows: items }}
+            entriesPerPage={false}
+            canSearch
+            loading={loading}
+          />
         </Card>
       </SuiBox>
       <Footer />
@@ -144,4 +130,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default UserList;

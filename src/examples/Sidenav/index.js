@@ -39,7 +39,6 @@ import SuiTypography from "components/SuiTypography";
 import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 import SidenavList from "examples/Sidenav/SidenavList";
 import SidenavItem from "examples/Sidenav/SidenavItem";
-import SidenavCard from "examples/Sidenav/SidenavCard";
 
 // Custom styles for the Sidenav
 import styles from "examples/Sidenav/styles/sidenav";
@@ -59,7 +58,7 @@ function Sidenav({ routes, ...rest }) {
   const location = useLocation();
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
-  const itemName = pathname.split("/").slice(1)[1];
+  const itemName = pathname.split("/").slice(1)[0];
 
   const closeSizenav = () => dispatch({ type: "MINI_SIDENAV", value: true });
 
@@ -117,7 +116,7 @@ function Sidenav({ routes, ...rest }) {
           <SidenavItem
             key={key}
             name={name}
-            active={key === itemName}
+            active={route.split("/")[1] === itemName}
             open={openNestedCollapse === name}
             onClick={() =>
               openNestedCollapse === name
@@ -137,11 +136,11 @@ function Sidenav({ routes, ...rest }) {
             rel="noreferrer"
             className={classes.sidenav_navlink}
           >
-            <SidenavItem name={name} active={key === itemName} />
+            <SidenavItem name={name} active={route.split("/")[1] === itemName} />
           </Link>
         ) : (
           <NavLink to={route} key={key} className={classes.sidenav_navlink}>
-            <SidenavItem name={name} active={key === itemName} />
+            <SidenavItem name={name} active={route.split("/")[1] === itemName} />
           </NavLink>
         );
       }
@@ -165,7 +164,7 @@ function Sidenav({ routes, ...rest }) {
             <SidenavCollapse
               name={name}
               icon={icon}
-              active={key === collapseName}
+              active={route.split("/")[1] === collapseName}
               noCollapse={noCollapse}
             />
           </Link>
@@ -174,7 +173,7 @@ function Sidenav({ routes, ...rest }) {
             key={key}
             name={name}
             icon={icon}
-            active={key === collapseName}
+            active={route.split("/")[1] === collapseName}
             open={openCollapse === name}
             onClick={() => (openCollapse === name ? setOpenCollapse(false) : setOpenCollapse(name))}
           >
@@ -243,9 +242,7 @@ function Sidenav({ routes, ...rest }) {
       <Divider />
       <List>{renderRoutes}</List>
 
-      <SuiBox customClass={classes.sidenav_footer}>
-        <SidenavCard />
-      </SuiBox>
+      <SuiBox customClass={classes.sidenav_footer} />
     </Drawer>
   );
 }
